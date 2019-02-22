@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body>
+<nav th:replace="layout :: header"></nav>
+
+<div class="container main-content list">
+    <div th:if="${success}" class="row alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span th:text="${success}"></span>
+    </div>
+
+    <th:block th:if="${#lists.isEmpty(accounts)}">
+        <h3 th:align="center">No account</h3>
+    </th:block>
+
+    <th:block th:unless="${#lists.isEmpty(accounts)}">
+        <div class="row">
+            <a action="#" th:href="@{/admin/account/create-account}" class="btn btn-success pull-left">
+                <span class="glyphicon glyphicon-plus"></span> Add new account
+            </a>
+            <form class="form-inline pull-right" action="#" th:action="@{/account/search}" method="GET">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="q"
+                           placeholder="Type account name..." />
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+        <div class="row">
+            <table class="table table-bordered table-hover" th:align="center">
+                <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Address</th>
+                    <th>Full Name</th>
+                    <th>Birthday</th>
+                    <th>is locked</th>
+                    <th>role</th>
+                    <th>Action</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <th:block th:each="p : ${accounts}">
+                    <tr>
+                        <td th:text="${p.userName}"></td>
+                        <td th:text="${p.address}"></td>
+                        <td th:text="${p.fullName}"></td>
+                        <td th:text="${p.birthday}"></td>
+                        <td> <span th:if="${p.isLocked}">active</span>
+                            <span th:if="${!p.isLocked}">close</span> </td>
+                        <td th:text="${p.role}"></td>
+                        <td> <a th:if="${p.isLocked}" th:href="@{/lock-open/__${p.id}__ }">khóa tài khoản</a>
+                            <a th:if="${!p.isLocked}" th:href="@{/lock-open/__${p.id}__ }">mở tài khoản</a> </td>
+                        <td><a th:href="@{/edit-account/__${p.id}__ }">Edit</a></td>
+                        <td><a th:href="@{/delete-account/__${p.id}__ }">Delete</a></td>
+                    </tr>
+                </th:block>
+            </table>
+        </div>
+    </th:block>
+</div>
+<!-- /.container -->
+
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

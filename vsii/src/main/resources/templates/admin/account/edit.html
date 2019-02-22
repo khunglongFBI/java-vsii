@@ -1,0 +1,53 @@
+    <!DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout::head">
+        <meta charset="UTF-8">
+        <title>Edit Account</title>
+    </head>
+    <body>
+    <nav th:replace="layout::header"></nav>
+    <div class="main-content">
+    <h1>Edit Account</h1>
+
+    <th:block th:if="${message}">
+        <p th:text="${message}"></p>
+    </th:block>
+    <form th:action="@{/edit-account}" th:object="${account}" method="post" class="main-content" th:align="center">
+        <input th:type="hidden" name="id" th:field="*{id}">
+        <input th:type="hidden" name="password" th:field="*{password}">
+        <table>
+            <tr>
+                <td>User Name:</td>
+                <td><input type="text" th:field="*{userName}"/></td>
+            </tr>
+            <tr>
+                <td>address:</td>
+                <td><input type="text" th:field="*{address}"/></td>
+            </tr>
+            <tr>
+                <td>fullName:</td>
+                <td><input type="text" th:field="*{fullName}"/></td>
+            </tr>
+            <tr>
+                <td>Birthday:</td>
+                <td><input type="date" th:field="*{Birthday}"/></td>
+            </tr>
+            <tr>
+                <td>role:</td>
+                <td>
+                    <select th:field="*{role}">
+                        <option th:each="p : ${roles}" th:value="${p.name}" th:text="${p.name}"
+                                th:selected="(${p.name} == *{role})"></option>></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Update account"></td>
+            </tr>
+        </table>
+    </form>
+    </div>
+    <footer th:replace="layout :: footer"></footer>
+    </body>
+    </html>

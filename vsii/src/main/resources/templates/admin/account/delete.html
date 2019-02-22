@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Delete note</title>
+</head>
+<body>
+<div class="main-content" th:align="center">
+<nav th:replace="layout::header"></nav>
+
+<h1>Delete note</h1>
+<h2>Are you sure?</h2>
+<p>
+    <a href="/admin">account list</a>
+</p>
+<form th:action="@{/delete-account}" th:object="${account}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <td>User Name:</td>
+            <td><input type="text" th:field="*{userName}"/></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type="text" th:field="*{password}"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Delete"></td>
+        </tr>
+    </table>
+</form>
+</div>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

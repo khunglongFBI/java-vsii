@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Delete bill</title>
+</head>
+<body class="main-content">
+<nav th:replace="layout::header"></nav>
+<form th:action="@{/delete-bill}" th:object="${bill}" method="post">
+    <input th:type="hidden" name="id" th:field="*{bill_id}">
+    <table class="table table-bordered table-hover" th:align="center">
+        <tr>
+            <td>Mã giao dịch:</td>
+            <td th:text="${bill.transId}"></td>
+        </tr>
+        <tr>
+            <td>Loại giao dịch:</td>
+            <td th:text="${bill.trans_type_code}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Delete"></td>
+        </tr>
+    </table>
+</form>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

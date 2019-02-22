@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+</head>
+<body class="main-content">
+<nav th:replace="layout::header"></nav>
+    <table class="table table-bordered table-hover" th:align="center">
+        <tr>
+            <td>Mã loại giao dịch:</td>
+            <td><p type="text" th:text="*{bill.trans_type_code}"></td>
+        </tr>
+        <tr class=>
+            <td>Số tham chiếu khách hàng:</td>
+            <td><p type="text" th:text="*{bill.cust_ref}"></td>
+        </tr>
+        <tr>
+            <td>Số tham chiếu ngân hàng:</td>
+            <td><p type="text" th:text="*{bill.bidv_ref}"></td>
+        </tr>
+        <tr>
+            <td>Tên khách hàng:</td>
+            <td><p type="text" th:text="*{bill.cust_name}"></td>
+        </tr>
+        <tr>
+            <td>Địa chỉ khách hàng:</td>
+            <td><p type="text" th:text="*{bill.cust_address}"></td>
+        </tr>
+        <tr>
+            <td>Số tiền:</td>
+            <td><p type="text" th:text="*{bill.amount}"></td>
+        </tr>
+        <tr>
+            <td>Loại tiền:</td>
+            <td><p type="text" th:text="*{bill.curr_code}"></td>
+        </tr>
+        <tr>
+            <td>Ghi chú:</td>
+            <td><p type="text" th:text="*{bill.remark}"></td>
+        </tr>
+        <tr>
+            <td>Trạng thái giao dịch:</td>
+            <td>
+                <p th:text="*{bill.trans_status_code.name}">
+            </td>
+        </tr>
+        <tr>
+            <td>Ngày gửi giao dịch:</td>
+            <td><p type="date" th:text="*{bill.send_date}"></td>
+        </tr>
+        <tr>
+            <td>Người gửi giao dịch:</td>
+            <td><p type="text" th:text="*{bill.send_user}"></td>
+        </tr>
+        <tr>
+            <td>Ngày duyệt/từ chối duyệt:</td>
+            <td><p type="date" th:text="*{bill.apporve_reject_date}"></td>
+        </tr>
+        <tr>
+            <td>Người duyệt/từ chối duyệt:</td>
+            <td><p type="text" th:text="*{bill.approve_reject_user}"></td>
+        </tr>
+        <tr>
+            <td>Mã chi nhánh:</td>
+            <td><p type="text" th:text="*{bill.branch_code}"></td>
+        </tr>
+        <tr>
+            <td>Giao dịch tạo bởi:</td>
+            <td><p type="number" th:text="*{bill.create_by}"></td>
+        </tr>
+        <tr>
+            <td>Ngày thanh toán:</td>
+            <td><p type="date" th:text="*{bill.payment_date}"></td>
+        </tr>
+        <tr>
+            <td>Ngày hiệu lực:</td>
+            <td><p type="date" th:text="*{bill.effective_date}"></td>
+        </tr>
+    </table>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

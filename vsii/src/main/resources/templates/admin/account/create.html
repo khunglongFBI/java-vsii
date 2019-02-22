@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Create Account</title>
+</head>
+<body>
+<div class="main-content">
+<nav th:replace="layout::header"></nav>
+<h1>Create Account</h1>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/create-account}" th:object="${account}" method="post">
+    <div class="form-group">
+        <tr>
+            <td>User Name:</td>
+            <td><input type="text" th:field="*{userName}" class="form-control"/></td>
+        </tr>
+    </div>
+    <div class="form-group">
+        <tr>
+            <td>Password:</td>
+            <td><input type="text" th:field="*{password}" class="form-control"/></td>
+        </tr>
+    </div>
+    <div class="form-group">
+        <tr>
+            <td>address:</td>
+            <td><input type="text" th:field="*{address}" class="form-control"/></td>
+        </tr>
+    </div>
+    <div class="form-group">
+        <tr>
+            <td>fullName:</td>
+            <td><input type="text" th:field="*{fullName}" class="form-control"/></td>
+        </tr>
+    </div>
+    <div class="form-group">
+        <tr>
+            <td>Birthday:</td>
+            <td><input type="date" th:field="*{Birthday}" class="form-control"/></td>
+        </tr>
+    </div>
+    <div class="form-group">
+        <tr>
+            <td>role:</td>
+            <td>
+                <select th:field="*{role}" class="form-control">
+                    <option th:each="p : ${roles}" th:value="${p.name}" th:text="${p.name}"></option>
+                </select>
+            </td>
+        </tr>
+    </div>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Create account"></td>
+        </tr>
+</form>
+</div>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

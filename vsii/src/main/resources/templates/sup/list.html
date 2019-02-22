@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>BIlls</title>
+</head>
+<body>
+<div class="main-content" th:align="center">
+<nav th:replace="layout::header"></nav>
+<h1 th:align="center">Transactions</h1>
+    <div class="container main-content list">
+<table class="table table-bordered table-hover" th:align="center">
+    <tr class="form-group">
+        <th>STT</th>
+        <th>Ngày khởi tạo</th>
+        <th>Số tham chiếu ngân hàng</th>
+        <th>Loại GD</th>
+        <th>Trạng thái</th>
+        <th>Chi nhánh</th>
+        <th>Số tiền</th>
+        <th>Loại tiền</th>
+        <th>Thông báo</th>
+
+    </tr>
+    <th:block th:each="p : ${bills}">
+        <tr>
+            <td th:text="${p.bill_id}"></td>
+            <td th:text="${p.create_date}"></td>
+            <td th:text="${p.bidv_ref}"></td>
+            <td th:text="${p.trans_type_code}"></td>
+            <td th:text="${p.trans_status_code.name}"></td>
+            <td th:text="${p.branch_code}"></td>
+            <td th:text="${p.amount}"></td>
+            <td th:text="${p.curr_code}"></td>
+            <td><a th:href="@{/views-bill/__${p.bill_id}__ }">Xem chi tiết</a></td>
+        </tr>
+    </th:block>
+</table>
+    <div>
+        <a th:href="@{'/sup/list'(page=${bills.number - 1})}" th:if="${bills.hasPrevious()}">Previous</a>
+        <span th:text="${bills.number + 1}"></span>/<span th:text="${bills.totalPages}"></span>
+        <a th:href="@{'/sup/list'(page=${bills.number + 1})}" th:if="${bills.hasNext()}">Next</a>
+    </div>
+</div>
+</div>
+</body>
+<footer th:replace="layout :: footer"></footer>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>BIlls</title>
+</head>
+<body>
+<div class="main-content">
+<nav th:replace="layout::header"></nav>
+<h1 th:align="center">Transaction</h1>
+<div class="row">
+    <a action="#" th:href="@{teller/create}" class="btn btn-success pull-left">
+        <span class="glyphicon glyphicon-plus"></span> Add new bill
+    </a>
+</div>
+<div>
+    <a th:href="@{'/sup/list'(page=${bills.number - 1})}" th:if="${bills.hasPrevious()}">Previous</a>
+    <span th:text="${bills.number + 1}"></span>/<span th:text="${bills.totalPages}"></span>
+    <a th:href="@{'/sup/list'(page=${bills.number + 1})}" th:if="${bills.hasNext()}">Next</a>
+</div>
+<table class="table table-bordered table-hover" th:align="center">
+    <tr>
+        <th>STT</th>
+        <th>Ngày khởi tạo</th>
+        <th>Số tham chiếu ngân hàng</th>
+        <th>Loại GD</th>
+        <th>Trạng thái</th>
+        <th>Chi nhánh</th>
+        <th>Số tiền</th>
+        <th>Loại tiền</th>
+        <th>Thông báo</th>
+        <th>Chấp nhận</th>
+        <th>Từ chối</th>
+        <th>Xóa</th>
+
+    </tr>
+    <th:block th:each="p : ${bills}">
+        <tr>
+            <td th:text="${p.bill_id}"></td>
+            <td th:text="${p.create_date}"></td>
+            <td th:text="${p.bidv_ref}"></td>
+            <td th:text="${p.trans_type_code}"></td>
+            <td th:text="${p.trans_status_code.name}"></td>
+            <td th:text="${p.branch_code}"></td>
+            <td th:text="${p.amount}"></td>
+            <td th:text="${p.curr_code}"></td>
+            <td><a th:href="@{/views-bill/__${p.bill_id}__ }">Xem chi tiết</a></td>
+            <td><a th:if="${p.trans_status_code.name == 'Wait for approval'}" th:href="@{/agree-bill-status/__${p.bill_id}__ }">chấp nhận</a></td>
+            <td><a th:if="${p.trans_status_code.name == 'Wait for approval'}" th:href="@{/refuse-bill-status/__${p.bill_id}__ }">từ chối</a></td>
+            <td><a th:if="${p.trans_status_code.name == 'temporarily saved' || p.trans_status_code.name == 'refuse'}" th:href="@{/delete-bill/__${p.bill_id}__ }">Delete</a></td>
+        </tr>
+    </th:block>
+</table>
+</div>
+</body>
+<footer th:replace="layout :: footer"></footer>
+</html>
